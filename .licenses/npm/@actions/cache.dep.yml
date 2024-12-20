@@ -1,9 +1,9 @@
 ---
-name: "@actions/cache"
+name: "@buildpulse/cache"
 version: 3.2.4
 type: npm
-summary: Actions cache lib
-homepage: https://github.com/actions/toolkit/tree/main/packages/cache
+summary: Actions BuildPulse cache lib
+homepage: https://github.com/buildpulse/toolkit/tree/main/packages/cache
 license: mit
 licenses:
 - sources: LICENSE.md

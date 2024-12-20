@@ -1,7 +1,4 @@
-# setup-go
-
-[![Basic validation](https://github.com/actions/setup-go/actions/workflows/basic-validation.yml/badge.svg)](https://github.com/actions/setup-go/actions/workflows/basic-validation.yml)
-[![Validate 'setup-go'](https://github.com/actions/setup-go/actions/workflows/versions.yml/badge.svg)](https://github.com/actions/setup-go/actions/workflows/versions.yml)
+# BuildPulse setup-go
 
 This action sets up a go environment for use in actions by:
 
@@ -14,7 +11,7 @@ The V5 edition of the action offers:
 
 - Upgraded Node.js runtime from node16 to node20
 
-See full release notes on the [releases page](https://github.com/actions/setup-go/releases).
+See full release notes on the [releases page](https://github.com/buildpulse/setup-go/releases).
 
 # V4
 
@@ -24,7 +21,7 @@ The V4 edition of the action offers:
 
 The action will try to enable caching unless the `cache` input is explicitly set to false.
 
-Please see "[Caching dependency files and build outputs](https://github.com/actions/setup-go#caching-dependency-files-and-build-outputs)" for more information.
+Please see "[Caching dependency files and build outputs](https://github.com/buildpulse/setup-go#caching-dependency-files-and-build-outputs)" for more information.
 
 # V3
 
@@ -51,7 +48,7 @@ Matching by [semver spec](https://github.com/npm/node-semver):
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: actions/setup-go@v5
+  - uses: buildpulse/setup-go@v5
     with:
       go-version: '^1.13.1' # The Go version to download (if necessary) and use.
   - run: go version
@@ -60,7 +57,7 @@ steps:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: actions/setup-go@v5
+  - uses: buildpulse/setup-go@v5
     with:
       go-version: '>=1.17.0'
   - run: go version
@@ -79,7 +76,7 @@ Matching an unstable pre-release:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: actions/setup-go@v5
+  - uses: buildpulse/setup-go@v5
     with:
       go-version: '1.18.0-rc.1' # The Go version to download (if necessary) and use.
   - run: go version
@@ -88,7 +85,7 @@ steps:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: actions/setup-go@v5
+  - uses: buildpulse/setup-go@v5
     with:
       go-version: '1.16.0-beta.1' # The Go version to download (if necessary) and use.
   - run: go version
@@ -103,7 +100,7 @@ See [action.yml](action.yml)
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: actions/setup-go@v5
+  - uses: buildpulse/setup-go@v5
     with:
       go-version: '1.16.1' # The Go version to download (if necessary) and use.
   - run: go run hello.go
@@ -124,7 +121,7 @@ want the most up-to-date Go version to always be used.
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: actions/setup-go@v5
+  - uses: buildpulse/setup-go@v5
     with:
       go-version: '1.14'
       check-latest: true
@@ -145,7 +142,7 @@ set to `true`
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: actions/setup-go@v5
+  - uses: buildpulse/setup-go@v5
     with:
       go-version: 'stable'
   - run: go run hello.go
@@ -154,7 +151,7 @@ steps:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: actions/setup-go@v5
+  - uses: buildpulse/setup-go@v5
     with:
       go-version: 'oldstable'
   - run: go run hello.go
@@ -163,7 +160,7 @@ steps:
 ## Caching dependency files and build outputs:
 
 The action has a built-in functionality for caching and restoring go modules and build outputs. It
-uses [toolkit/cache](https://github.com/actions/toolkit/tree/main/packages/cache) under the hood but requires less configuration settings.
+uses [toolkit/cache](https://github.com/buildpulse/toolkit/tree/main/packages/cache) under the hood but requires less configuration settings.
 The `cache` input is optional, and caching is turned on by default.
 
 The action defaults to search for the dependency file - go.sum in the repository root, and uses its hash as a part of
@@ -177,7 +174,7 @@ If some problem that prevents success caching happens then the action issues the
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: actions/setup-go@v5
+  - uses: buildpulse/setup-go@v5
     with:
       go-version: '1.17'
       check-latest: true
@@ -193,8 +190,8 @@ steps:
 
 The `go-version-file` input accepts a path to a `go.mod` file or a `go.work` file that contains the version of Go to be used by a project.
 
-The `go` directive in `go.mod` can specify a patch version or omit it altogether (e.g., `go 1.22.0` or `go 1.22`).  
-If a patch version is specified, that specific patch version will be used.  
+The `go` directive in `go.mod` can specify a patch version or omit it altogether (e.g., `go 1.22.0` or `go 1.22`).
+If a patch version is specified, that specific patch version will be used.
 If no patch version is specified, it will search for the latest available patch version in the cache,
 [versions-manifest.json](https://github.com/actions/go-versions/blob/main/versions-manifest.json), and the
 [official Go language website](https://golang.org/dl/?mode=json&include=all), in that order.
@@ -205,7 +202,7 @@ If both the `go-version` and the `go-version-file` inputs are provided then the 
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  - uses: actions/setup-go@v5
+  - uses: buildpulse/setup-go@v5
     with:
       go-version-file: 'path/to/go.mod'
   - run: go version
@@ -224,7 +221,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup go
-        uses: actions/setup-go@v5
+        uses: buildpulse/setup-go@v5
         with:
           go-version: ${{ matrix.go }}
       - run: go run hello.go
@@ -252,7 +249,7 @@ If that fails as well the action will try to download versions directly from htt
 If that fails as well you can get a higher rate limit with [generating a personal access token on github.com](https://github.com/settings/tokens/new) and passing it as the `token` input to the action:
 
 ```yaml
-uses: actions/setup-go@v5
+uses: buildpulse/setup-go@v5
 with:
   token: ${{ secrets.GH_DOTCOM_TOKEN }}
   go-version: '1.18'
